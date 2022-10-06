@@ -5,17 +5,20 @@ import java.lang.Double;
 public class Plateau {
 
 	Ville[] villes = new Ville[Donnees.VILLES.length];
-	Route[] routes;
+	Route[] routes = new Route[Donnees.ROUTES.length];
 	
 	//Définition du constructeur de la classe
 	Plateau(){
-		for(int k = 0; k < Donnees.VILLES.length; k++) {
+		for(int k = 0; k < Donnees.VILLES.length; k++) { //on utilise une boucle pour définir tous les objets ville présent dans le tableau
 			Ville ville = new Ville(getDonneesVillesNom(k), getDonneesVillesX(k), getDonneesVillesY(k));
 			villes[k] = ville;
 		}
+		for(int h = 0; h < Donnees.ROUTES.length; h++ ) {
+				Route route = new Route(Donnees.ROUTES[h][2], getVille(h, 0), getVille(h, 1));
+				routes[h] = route;
+		}
 	}
-	
-	
+	// Définition de la méthode permettant d'obtenir le nom des ville dans le fichier Donnees.java
 	String getDonneesVillesNom(int k) {
 		int espace = 0;
 		int count = 0;
@@ -45,9 +48,7 @@ public class Plateau {
 		}
 		return result;
 	}
-
-
-	
+	//Définition de la méthode permettant d'obtenir la coordonnée x des villes dans le dossier Donnees.java
 	double getDonneesVillesX(int k) {
 		int espace = 0;
 		int count = 0;
@@ -81,7 +82,7 @@ public class Plateau {
 			return 0;
 		}
 	
-	
+	//Définition de la méthode permettant d'obtenir la coordonnée y des villes dans le dossier Donnees.java
 	double getDonneesVillesY(int k) {
 		int espace = 0;
 		int count = 0;
@@ -108,7 +109,16 @@ public class Plateau {
 		}
 		return 0;
 	}
+	
+	
+	Ville getVille(int h, int u) {
+		for(int i = 0; i < villes.length ; i++) {
+			if(villes[i].nom == Donnees.ROUTES[h][u]) {
+				return villes[i];
+			}
+		}
+		return null;
+	}
 }
-
 
 
